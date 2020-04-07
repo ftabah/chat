@@ -34,7 +34,7 @@
 		  return false;
 		});
 		socket.on('chat message', function(msg){
-		  $('#messages').append($('<li style="color:'+msg.split(';')[0]+'">').text(msg.split(';')[1]));
+		  $('#messages').append($('<li style="color:'+msg.split('~;~;!')[0]+'">').text(msg.split('~;~;!')[1]));
 		});
 	  });
 	</script>

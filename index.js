@@ -16,21 +16,19 @@ app.get('/', function(req, res){
 
 io.on('connection', socket => {
   socket.on('new-user', name => {
-	  console.log("new " + name)
-	  console.log("new sid " + socket.id)
 	  users[socket.id] = name
-	  //cria cor randomica pra letra
+	  //random font color for each user 'logged' in
 	  var letters = '23456789ABCD';
 	  var color = '#';
 	  for (var i = 0; i < 6; i++) {
 		color += letters[Math.floor(Math.random() * 12)];
 	  }
 	  colors[socket.id] = color
-	  
-	  io.emit('chat message', colors[socket.id] + ';' + users[socket.id] + " CONNECTED");
+	  //message announcing new user
+	  io.emit('chat message', colors[socket.id] + '~;~;!' + users[socket.id] + " CONNECTED");
   })
   socket.on('chat message', function(msg){
-    io.emit('chat message', colors[socket.id] + ';' + users[socket.id] + ": " + msg);
+    io.emit('chat message', colors[socket.id] + '~;~;!' + users[socket.id] + ": " + msg);
   });
   socket.on('disconnect', () => {
 	  if (users[socket.id] != null) {
